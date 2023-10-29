@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddtaskComponent } from './addtask/addtask.component';
+import { taskGuard } from './guards/task.guard';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -14,8 +15,12 @@ const routes: Routes = [
   {path: 'dashboard', component:DashboardComponent},
   {path: 'dashboard/addtask', component:AddtaskComponent},
 
+
+  {path: 'addtask', component:AddtaskComponent, canActivate:[taskGuard]},
+
   {path: "**", component:ErrorpageComponent},
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-interface ContactInterface {
-  Username: string;
-  Password: string;
-  IsLogin:Boolean;
-  UpdatedAt: Date;
-}
 
 @Component({
   selector: 'app-login',
@@ -15,28 +9,27 @@ interface ContactInterface {
 })
 export class LoginComponent {
   constructor (public route : Router){}
-  public username: string = '';
-  public password: string = '';
-  public islogin = true;
-  public contactArray: ContactInterface[] = [];
+  public username = '';
+  public password = '';
+  public contactArray = []
   public updated_at: Date = new Date();
 
-    ngOnInit() {
-      this.contactArray = JSON.parse(localStorage["customerDetails"]) || [];
-      console.log(this.contactArray)
-      const loggedInUser = this.contactArray.find(
-        (contact) => contact.Username === this.username && contact.Password === this.password
-      );
+  ngOnInit(){
+    let contactDetails:any = localStorage.getItem("customerDetails");
+    console.log(contactDetails);
     
-      if (loggedInUser) {
-        this.islogin = true;
-        localStorage.setItem("isLogin", JSON.stringify(true)); // Set isLogin to true in local storage
-        localStorage.setItem("currentUser", JSON.stringify(loggedInUser));
-        this.route.navigate(['dashboard']);
-      } else {
-        this.islogin = false;
-        localStorage.setItem("isLogin", JSON.stringify(false)); // Set isLogin to false in local storage
-      }
+    contactDetails = JSON.parse(contactDetails);
+    console.log(contactDetails);
+    
+    if (contactDetails) {
+        this.contactArray = contactDetails
+    } else {
+        this.contactArray = [];
     }
-
+  }
+  login(){
+    // let FindUser = this.contactArray.find((each:any)=>each.username == this.username && each.password == this.password)
+    // console.log(FindUser);
+    console.log(this.username , this.password)
+  }
 }

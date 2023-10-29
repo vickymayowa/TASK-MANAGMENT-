@@ -34,8 +34,14 @@ export class RegisterComponent {
   public updated_at: Date = new Date();
   public message = false;
   public islogin = false;
-
+  public user_id:any = 1;
   ngOnInit() {
+    let user_id:any = localStorage.getItem('taskId');
+    if(user_id){
+      this.user_id = JSON.parse(user_id);
+    }else{
+      this.user_id = 1;
+    }
     const contactDetails = localStorage["customerDetails"];
     if (contactDetails) {
         this.contactArray = JSON.parse(contactDetails) as ContactInterface[];
@@ -50,6 +56,7 @@ addDetails() {
   } else {
     const uniqueId = uuidv4();
     const contactObject = {
+      user_id:this.user_id,
       Fullname: this.fullname,
       Username: this.username,
       Address: this.address,
@@ -57,13 +64,15 @@ addDetails() {
       Phone: this.phone,
       IsLogin:this.isLogin,
       Password: this.password,
-      UniqueId: uniqueId,
+      UniqueId: uniqueId, 
       CreatedAt: this.created_at,
       UpdatedAt: this.updated_at,
   };
     this.contactArray.push(contactObject);
+    this.user_id = this.user_id + 1
     localStorage.setItem("isLogin",JSON.stringify(this.islogin))
     localStorage.setItem("customerDetails", JSON.stringify(this.contactArray));
+    localStorage.setItem('taskId',JSON.stringify(this.user_id));
     this.route.navigate(['login'])
   }
 }

@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { AddtaskComponent } from './addtask/addtask.component';
+import { ViewTaskComponent } from './view-task/view-task.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AddtaskComponent } from './addtask/addtask.component';
     HomeComponent,
     DashboardComponent,
     ErrorpageComponent,
-    AddtaskComponent
+    AddtaskComponent,
+    ViewTaskComponent
   ],
   imports: [
     BrowserModule,
