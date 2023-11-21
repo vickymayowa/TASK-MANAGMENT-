@@ -28,8 +28,8 @@ export class LoginComponent {
     }
   }
   login(){
-    // let FindUser = this.contactArray.find((each:any)=>each.username == this.username && each.password == this.password)
-    // console.log(FindUser);
+    let FindUser = this.contactArray.find((each:any)=>each.username == this.username && each.password == this.password)
+    console.log(FindUser);
     console.log(this.username , this.password)
   }
 }
